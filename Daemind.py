@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import socket, sys, json, random, math
+import socket, sys, json
 from threading import *
 from Queue import *
 from time import *
@@ -27,6 +27,8 @@ class udp_thread (Thread):
 		authorize = "{\"appName\":\"BrainwaveShooters\",\"appKey\":\"9f54141b4b4c567c558d3a76cb8d715cbde03096\"}"
 		self.s.send(authorize)
 
+
+
 	def run(self):
 		BUFFER = 2048
 		#keep on receiving data and put it into the queue
@@ -41,6 +43,8 @@ class udp_thread (Thread):
 				except: 
 					#print 'data was incomplete'
 					return
+
+			
 
 
 def parse(queue, s_mx):
@@ -78,6 +82,8 @@ if __name__=="__main__":
 	SEND_IP = '127.0.0.1'
 	SEND_PORT = 65000
 
+
+
 	if len(sys.argv) > 1:
 		if '-h' in sys.argv:
 			print "\n\t### USAGE ###"
@@ -95,18 +101,26 @@ if __name__=="__main__":
 				i = sys.argv.index('-a')
 				SEND_IP = str(sys.argv[i+1])
 
+
+	
 	SOCKET_UDP = (SEND_IP,SEND_PORT)
+
+
 
 	print "\n\tCONNECTING\n\tport: ",SEND_PORT,"\n\tIP: ",SEND_IP,'\n'
 
 	s_mx = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
 
 	queue = Queue()
 	t = udp_thread(queue)
 	t.daemon = True
 	t.start()
 
+	
+
 	print '\nRUNNING...\n'
+
 
 	while 1:
 		parse(queue, s_mx)
