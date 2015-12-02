@@ -27,7 +27,7 @@ You can also make it executable
 
 ##Requirements 
 
-This daemon is written in Python 2.6 but can easily be ported even in Python 3.x
+This daemon is written in Python 2.6 but can easily be ported even in Python 3.x.
 Requires the following library (you should already have all of them)
 - Time
 - Queue
